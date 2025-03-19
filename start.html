@@ -24,6 +24,7 @@
             padding: 0;
             overflow-x: hidden;
             min-height: 100%;
+            font-size: 16px;
         }
 
         body {
@@ -91,7 +92,7 @@
             backdrop-filter: blur(5px);
             padding: 8px 16px;
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             font-weight: 500;
             color: #e2e8f0;
             margin-bottom: 25px;
@@ -100,38 +101,40 @@
             box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
         }
 
-        /* Heading utama - enhanced */
+        /* Heading utama - LARGER as requested */
         h1 {
-            font-size: 3.5rem;
+            font-size: 4.5rem; /* Increased from 4rem */
             font-weight: 800;
             line-height: 1.1;
             background: linear-gradient(90deg, #60a5fa, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
+            margin-bottom: 25px; /* Increased margin */
             text-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+            letter-spacing: -1px; /* Added for better readability at large size */
         }
 
         h1 span {
             display: block;
         }
 
-        /* Deskripsi - enhanced */
+        /* Deskripsi - SMALLER as requested */
         .hero-description {
-            font-size: 1.1rem;
+            font-size: 1.15rem; /* Decreased from 1.3rem */
             color: #e2e8f0;
             margin-bottom: 30px;
             line-height: 1.6;
-            max-width: 600px;
+            max-width: 650px; /* Decreased from 700px */
+            padding: 0 15px;
         }
 
-        /* Tombol - enhanced */
+        /* Tombol - enhanced and larger */
         .cta-button {
             display: inline-block;
             background: linear-gradient(90deg, #4f46e5, #7c3aed);
-            padding: 16px 36px;
+            padding: 18px 40px;
             border-radius: 12px;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: white;
             text-decoration: none;
@@ -143,7 +146,7 @@
             border: none;
             outline: none;
             z-index: 20;
-            margin: 10px 0;
+            margin: 15px 0;
             transform: translateZ(0);
         }
 
@@ -180,7 +183,7 @@
         /* Features section - enhanced */
         .features-section {
             width: 100%;
-            padding: 60px 20px;
+            padding: 70px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -199,7 +202,7 @@
         .feature-card {
             flex: 1 1 300px;
             max-width: 350px;
-            padding: 30px;
+            padding: 35px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -236,28 +239,28 @@
         }
         
         .feature-icon {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(99, 102, 241, 0.2);
             border-radius: 50%;
-            margin-bottom: 20px;
-            font-size: 28px;
+            margin-bottom: 25px;
+            font-size: 32px;
             color: #818cf8;
             box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
         }
         
         .feature-title {
             font-weight: 700;
-            font-size: 1.3rem;
-            margin-bottom: 12px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             color: #f8fafc;
         }
         
         .feature-desc {
-            font-size: 1rem;
+            font-size: 1.2rem;
             color: #cbd5e1;
             text-align: center;
             line-height: 1.6;
@@ -266,12 +269,12 @@
         /* Responsive styles */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 3.5rem; /* Increased from 3rem */
             }
             
             .hero-description {
-                font-size: 1rem;
-                padding: 0 10px;
+                font-size: 1.1rem; /* Decreased from 1.2rem */
+                padding: 0 15px;
             }
             
             .feature-card {
@@ -281,38 +284,46 @@
             }
             
             .cta-button {
-                padding: 14px 28px;
-                font-size: 1.1rem;
+                padding: 16px 32px;
+                font-size: 1.3rem;
             }
             
             .hero-section {
                 min-height: 50vh;
-                padding: 30px 15px;
+                padding: 40px 20px;
+            }
+            
+            .badge {
+                font-size: 1rem;
             }
         }
 
         @media (max-width: 480px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.8rem; /* Increased from 2.5rem */
             }
             
             .badge {
-                font-size: 0.8rem;
-                padding: 6px 12px;
+                font-size: 0.9rem;
+                padding: 7px 14px;
             }
             
             .feature-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
+                width: 70px;
+                height: 70px;
+                font-size: 28px;
             }
             
             .feature-title {
-                font-size: 1.1rem;
+                font-size: 1.3rem;
             }
             
             .feature-desc {
-                font-size: 0.9rem;
+                font-size: 1.1rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem; /* Decreased from 1.1rem */
             }
         }
 
