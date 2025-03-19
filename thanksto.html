@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanks To - Painzy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+        :root {
+            --neon-primary: #00ffcc;
+            --neon-secondary: #ff00ff;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: #111;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 36px;
+            text-shadow: 0 0 10px var(--neon-primary), 0 0 20px var(--neon-primary);
+            margin-bottom: 20px;
+        }
+
+        .thanks-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .thanks-card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--neon-secondary);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+            width: 200px;
+        }
+
+        .thanks-card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--neon-primary);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 2px solid var(--neon-primary);
+            text-decoration: none;
+            color: var(--neon-primary);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .back-button:hover {
+            background: var(--neon-primary);
+            color: #111;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="title">Special Thanks To</h1>
+        <div class="thanks-grid">
+            <div class="thanks-card">
+                <h2>Painzy</h2>
+                <p>Developer</p>
+            </div>
+            <div class="thanks-card">
+                <h2>ZexBreak</h2>
+                <p>Friends</p>
+            </div>
+            <div class="thanks-card">
+                <h2>ChatGPT</h2>
+                <p>Support</p>
+            </div>
+            <div class="thanks-card">
+                <h2>Siput</h2>
+                <p>API Support</p>
+            </div>
+        </div>
+        <a href="index.html" class="back-button">Back to Home</a>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.from(".title", { opacity: 0, y: -50, duration: 1 });
+            gsap.from(".thanks-card", { opacity: 0, scale: 0.8, stagger: 0.3, duration: 1 });
+        });
+    </script>
+
+</body>
+</html>
