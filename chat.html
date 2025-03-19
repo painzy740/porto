@@ -138,15 +138,10 @@
             border-bottom: 1px solid rgba(0, 238, 255, 0.1);
         }
 
-        .navbar .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 24px;
-            color: #fff;
-            text-shadow: 0 0 5px var(--neon-primary), 
-                        0 0 10px var(--neon-primary);
-            text-decoration: none;
-            letter-spacing: 2px;
-        }
+        .navbar .logo img {
+            height: 40px; /* Sesuaikan ukuran logo */
+            filter: drop-shadow(0 0 5px var(--neon-primary)); /* Efek neon */
+}
 
         .navbar .nav-links {
             display: flex;
@@ -621,19 +616,19 @@
     <div class="grid-overlay"></div>
 
     <div class="navbar">
-        <a href="#" class="logo">PAINZY</a>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Features</a>
-            <a href="#">Contact</a>
-        </div>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+    <a href="#" class="logo">
+        <img src="https://painzysite.biz.id/painzy.png" alt="Painzy Logo">
+    </a>
+    <div class="nav-links">
+        <a href="https://painzysite.biz.id/">Home</a>
+        <a href="https://painzysite.biz.id/thanksto.html">Thanks To</a>
     </div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
 
     <div class="title-container">
         <h2>Painzy AI Chatbot</h2>
