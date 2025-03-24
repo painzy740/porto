@@ -646,57 +646,67 @@
         <button onclick="sendMessage()">➤</button>
     </div>
 
-    <script>  
-        function toggleMenu() {  
-            let navLinks = document.querySelector(".nav-links");  
-            let menuToggle = document.querySelector(".menu-toggle");  
-              
-            navLinks.classList.toggle("show");  
-            menuToggle.classList.toggle("active");  
-        }  
-  
-        function handleKey(event) {  
-            if (event.key === "Enter") {  
-                sendMessage();  
-            }  
-        }  
-  
-        function sendMessage() {  
-            let inputField = document.getElementById("userInput");  
-            let userMessage = inputField.value.trim();  
-            if (!userMessage) return;  
-  
-            let chatBox = document.getElementById("chat");  
-            chatBox.innerHTML += `<div class="message user">${userMessage}</div>`;  
-            inputField.value = "";  
-            chatBox.scrollTop = chatBox.scrollHeight;  
-  
-            let loadingMessage = document.createElement("div");  
-            loadingMessage.className = "message bot loading";  
-            loadingMessage.innerText = "Painzy AI sedang mengetik";  
-            chatBox.appendChild(loadingMessage);  
-            chatBox.scrollTop = chatBox.scrollHeight;  
-  
-            let responses = {  
-                "siapa kamu": "Saya adalah <b>Painzy AI</b>, asisten kecerdasan buatan yang dikembangkan oleh <b>Painzy Dev</b>.",  
-                "apa itu painzy ai": "Painzy AI adalah chatbot berbasis kecerdasan buatan yang dapat membantu dalam berbagai hal.",  
-                "siapa yang membuat painzy ai": "Saya dikembangkan oleh <b>Painzy Dev</b>.",  
-                "apa yang bisa kamu lakukan": "Saya dapat membantu menjawab pertanyaan, memberikan informasi, dan membantu dalam berbagai tugas digital.",  
-                "apakah kamu manusia": "Tidak, saya adalah chatbot berbasis kecerdasan buatan.",  
-                "bagaimana cara kamu bekerja": "Saya bekerja menggunakan model AI yang telah dilatih untuk memahami bahasa manusia.",  
-                "apakah kamu bisa belajar sendiri": "Saat ini, saya tidak dapat belajar sendiri. Saya bergantung pada pembaruan dari tim Painzy Dev."  
-            };  
-  
-            if (responses[userMessage.toLowerCase()]) {  
-                setTimeout(() => {  
-                    loadingMessage.remove();  
-                    chatBox.innerHTML += `<div class="message bot">${responses[userMessage.toLowerCase()]}</div>`;  
-                    chatBox.scrollTop = chatBox.scrollHeight;  
-                }, 1000);  
-                return;  
-            }  
-  
-            let apiUrl = `https://www.laurine.site/api/cai/prompt-ai?query=${encodeURIComponent(userMessage)}&prompt=nama lo painzy ai, ai kece dari painzy. logat lo logat ciledug, jadi jawabannya santai, agak nyablak, tapi tetep sopan. kalo ada yang nanya, lo kasih jawaban yang jelas tapi tetep ada gaya anak tongkrongan.
+    <script>
+    function toggleMenu() {
+        let navLinks = document.querySelector(".nav-links");
+        let menuToggle = document.querySelector(".menu-toggle");
+
+        if (navLinks && menuToggle) {
+            navLinks.classList.toggle("show");
+            menuToggle.classList.toggle("active");
+        }
+    }
+
+    function handleKey(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+
+    async function sendMessage() {
+        let inputField = document.getElementById("userInput");
+        let chatBox = document.getElementById("chat");
+
+        if (!inputField || !chatBox) return;
+
+        let userMessage = inputField.value.trim();
+        if (!userMessage) return;
+
+        // Tambahkan pesan pengguna ke chatbox
+        chatBox.innerHTML += `<div class="message user">${userMessage}</div>`;
+        inputField.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Tambahkan pesan loading
+        let loadingMessage = document.createElement("div");
+        loadingMessage.className = "message bot loading";
+        loadingMessage.innerText = "Painzy AI sedang mengetik...";
+        chatBox.appendChild(loadingMessage);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Respon chatbot manual
+        let responses = {
+            "siapa kamu": "Saya adalah <b>Painzy AI</b>, asisten kecerdasan buatan yang dikembangkan oleh <b>Painzy Dev</b>.",
+            "apa itu painzy ai": "Painzy AI adalah chatbot berbasis kecerdasan buatan yang dapat membantu dalam berbagai hal.",
+            "siapa yang membuat painzy ai": "Saya dikembangkan oleh <b>Painzy Dev</b>.",
+            "apa yang bisa kamu lakukan": "Saya dapat membantu menjawab pertanyaan, memberikan informasi, dan membantu dalam berbagai tugas digital.",
+            "apakah kamu manusia": "Tidak, saya adalah chatbot berbasis kecerdasan buatan.",
+            "bagaimana cara kamu bekerja": "Saya bekerja menggunakan model AI yang telah dilatih untuk memahami bahasa manusia.",
+            "apakah kamu bisa belajar sendiri": "Saat ini, saya tidak dapat belajar sendiri. Saya bergantung pada pembaruan dari tim Painzy Dev."
+        };
+
+        let lowerMessage = userMessage.toLowerCase();
+        if (responses[lowerMessage]) {
+            setTimeout(() => {
+                loadingMessage.remove();
+                chatBox.innerHTML += `<div class="message bot">${responses[lowerMessage]}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+            return;
+        }
+
+        // URL API
+        let apiUrl = `https://www.laurine.site/api/cai/prompt-ai?query=${encodeURIComponent(userMessage)}&prompt=nama lo painzy ai, ai kece dari painzy. logat lo logat ciledug, jadi jawabannya santai, agak nyablak, tapi tetep sopan. kalo ada yang nanya, lo kasih jawaban yang jelas tapi tetep ada gaya anak tongkrongan.
 
 contoh gaya bahasa lo:
 
@@ -707,22 +717,25 @@ contoh gaya bahasa lo:
 "yoi, ngerti banget gua! nih jawaban buat lo..."
 
 
-jangan pake bahasa formal banget, biar obrolannya lebih asik. jangan cuma jawab pendek, kasih sedikit tambahan biar kayak ngobrol beneran. pokoknya lo harus jadi ai yang santai, friendly, tapi tetep informatif! `;  
-  
-            fetch(apiUrl)  
-                .then(response => response.json())  
-                .then(data => {  
-                    let aiResponse = data.data.choices[0].message.content;  
-                    loadingMessage.remove();  
-                    chatBox.innerHTML += `<div class="message bot">${aiResponse}</div>`;  
-                    chatBox.scrollTop = chatBox.scrollHeight;  
-                })  
-                .catch(error => {  
-                    loadingMessage.remove();  
-                    chatBox.innerHTML += `<div class="message bot">Maaf, terjadi kesalahan.</div>`;  
-                    console.error("Error:", error);  
-                });  
-        }  
-    </script>
+jangan pake bahasa formal banget, biar obrolannya lebih asik. jangan cuma jawab pendek, kasih sedikit tambahan biar kayak ngobrol beneran. pokoknya lo harus jadi ai yang santai, friendly, tapi tetep informatif!`;
+
+        try {
+            let response = await fetch(apiUrl);
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+            let data = await response.json();
+            let aiResponse = data?.data || "Maaf, AI tidak bisa memberikan jawaban saat ini.";
+
+            loadingMessage.remove();
+            chatBox.innerHTML += `<div class="message bot">${aiResponse}</div>`;
+        } catch (error) {
+            console.error("Error:", error);
+            loadingMessage.remove();
+            chatBox.innerHTML += `<div class="message bot">Maaf, terjadi kesalahan. Silakan coba lagi nanti.</div>`;
+        }
+
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
 </body>
 </html>
