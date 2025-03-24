@@ -667,49 +667,63 @@ async function sendMessage() {
     if (!userMessage) return;
 
     let chatBox = document.getElementById("chat");
+
+    // Tambahin chat dari user
     chatBox.innerHTML += `<div class="message user">${userMessage}</div>`;
     inputField.value = "";
     chatBox.scrollTop = chatBox.scrollHeight;
 
+    // Pesan loading
     let loadingMessage = document.createElement("div");
     loadingMessage.className = "message bot loading";
-    loadingMessage.innerText = "bentar ya, ane mikir dulu...";
+    loadingMessage.innerText = "ntar yee... painzy ai lagi mikir nih...";
     chatBox.appendChild(loadingMessage);
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    const prompt = `
-nama lo painzy ai, ai kece dari painzy.
-logat lo logat ciledug, jadi jawabannya santai, agak nyablak, tapi tetep sopan.
-kalo ada yang nanya, lo kasih jawaban yang jelas tapi tetep ada gaya anak tongkrongan.
+    try {
+        // Format prompt pake logat Ciledug
+        let prompt = `nama lo painzy ai, ai kece dari painzy. logat lo logat ciledug, jadi jawabannya santai, agak nyablak, tapi tetep sopan. kalo ada yang nanya, lo kasih jawaban yang jelas tapi tetep ada gaya anak tongkrongan.
 
 contoh gaya bahasa lo:
-- "waduh, itu sih gampang banget, bro! nih gua jelasin..."
-- "santai aja, bosku! jadi gini ceritanya..."
-- "yoi, ngerti banget gua! nih jawaban buat lo..."
 
-jangan pake bahasa formal banget, biar obrolannya lebih asik.
-jangan cuma jawab pendek, kasih sedikit tambahan biar kayak ngobrol beneran.
-pokoknya lo harus jadi ai yang santai, friendly, tapi tetep informatif!
-    `;
+"waduh, itu sih gampang banget, bro! nih gua jelasin..."
 
-    try {
-        const response = await fetch(`https://www.laurine.site/api/cai/prompt-ai?query=${encodeURIComponent(userMessage)}&prompt=${encodeURIComponent(prompt)}`);
-        const data = await response.json();
+"santai aja, bosku! jadi gini ceritanya..."
 
-        if (data.status && data.data) {
-            let aiResponse = data.data;
-            loadingMessage.remove();
-            chatBox.innerHTML += `<div class="message bot">${aiResponse}</div>`;
-        } else {
-            loadingMessage.remove();
-            chatBox.innerHTML += `<div class="message bot">yah, ada error nih.. coba lagi bentar yaa</div>`;
+"yoi, ngerti banget gua! nih jawaban buat lo..."
+
+
+jangan pake bahasa formal banget, biar obrolannya lebih asik. jangan cuma jawab pendek, kasih sedikit tambahan biar kayak ngobrol beneran. pokoknya lo harus jadi ai yang santai, friendly, tapi tetep informatif! `;
+        let apiUrl = `https://www.laurine.site/api/cai/prompt-ai?query=${encodeURIComponent(userMessage)}&prompt=${encodeURIComponent(prompt)}`;
+
+        let response = await fetch(apiUrl, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`yah, error! status: ${response.status}`);
         }
-        chatBox.scrollTop = chatBox.scrollHeight;
+
+        let data = await response.json();
+        console.log("API Response:", data); // Buat debugging
+
+        // Cek apakah format JSON bener
+        if (data && data.status === true && data.data) {
+            loadingMessage.remove();
+            chatBox.innerHTML += `<div class="message bot">${data.data}</div>`;
+        } else {
+            throw new Error("lah, respons API-nya aneh nih!");
+        }
     } catch (error) {
+        console.error("Error:", error);
         loadingMessage.remove();
-        chatBox.innerHTML += `<div class="message bot">wah, koneksi lu ngadat kali nih.. coba refresh deh!</div>`;
-        console.error("error:", error);
+        chatBox.innerHTML += `<div class="message bot">yah, ada yang error... coba lagi dah bentar!</div>`;
     }
+
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
     </script>
 </body>
